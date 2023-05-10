@@ -8,11 +8,6 @@ from dotenv import load_dotenv
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-SECRET_KEY = os.environ.get("VULNERS_API_KEY")
-print(SECRET_KEY)
-
-# display .env file
-print("ENVIRONMENT VARIABLES:")
 
 
 if __name__ == "__main__":
