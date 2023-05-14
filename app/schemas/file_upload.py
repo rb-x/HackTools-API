@@ -7,3 +7,8 @@ class FileUpload(BaseModel):
     system: UploadFile
     security: UploadFile
     ntds: UploadFile
+
+
+# LSASS upload ase B64 json
+class LSASS_B64DUMP(BaseModel):
+    lsass: str
