@@ -7,13 +7,13 @@ import vulners,os
 
 router = APIRouter()
 
-vulners_api = vulners.Vulners(api_key=os.getenv("VULNERS_API_KEY"))
 
 
 @router.post("/")
 # get a json {"service": "xxx"}
 async def vulners_vuln_reserach(vulners_vuln_search: VulnersVulnSearch):
     
+    vulners_api = vulners.Vulners(api_key=os.getenv("VULNERS_API_KEY"))
     # return the body 
     try :
         result = vulners_api.searchExploit(vulners_vuln_search.service)

@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 import secrets
-from app.decryption import sam, ntds, lsass
+from app.windows import sam, ntds, lsass
 from app.services import vulners
 import logging,os
 

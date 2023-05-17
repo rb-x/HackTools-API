@@ -1,7 +1,7 @@
 # app/decryption/ntds.py
 from fastapi import APIRouter, File, UploadFile
 from app.schemas.file_upload import LSASS_B64DUMP
-from app.decryption.utils import dump_lsass
+from .utils import dump_lsass
 
 
 router = APIRouter()
