@@ -1,17 +1,21 @@
-from fastapi import FastAPI, HTTPException, Depends, APIRouter, Request
-from fastapi.middleware.cors import CORSMiddleware
-from starlette.responses import JSONResponse
+import logging
+import os
 import secrets
-from app.routes.windows import sam, ntds, lsass
-from app.services import vulners
-import logging,os
 from typing import Optional
 
+from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.routes.windows import lsass, ntds, sam
+from app.services import vulners
+
 logger = logging.getLogger("api_key_logger")
-dev = os.environ.get("DEV")
+dev = os.environ.get("HTOOLS_SERVER_DEV")
 API_KEY = secrets.token_urlsafe(32) if not dev else "test"
 
-app = FastAPI()
+
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None) if not dev else FastAPI()
+
 app.add_middleware(
     CORSMiddleware, 
     allow_origins=["*"], 
@@ -45,6 +49,7 @@ async def ping():
 @app.get("/auth_check")
 async def auth_check(api_key: str = Depends(api_key_check)):
     return {"status": "success"}
+
 
 app.include_router(vulners.router, prefix="/vulners", tags=["Vulners API"])
 app.include_router(sam.router, prefix="/decrypt/sam", tags=["SAM Decryption"])
