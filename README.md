@@ -1,4 +1,4 @@
-<center><h1> HackTools server</h1></center>
+<center><h1> HackTools API</h1></center>
 
 ## Description
 
